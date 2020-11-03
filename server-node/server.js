@@ -11,11 +11,12 @@ app.use(cors()); //Setup cors
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 // Set our api response
+
 app.get('/api', (req, res) => {
-  res.send('api works');
+  var jsonData = {"results": ["Important 1 ","Thing 2"]};
+  res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(jsonData));
 });
-
-
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
    res.send('app works!');
@@ -27,7 +28,6 @@ app.get('*', (req, res) => {
  */
 const port = process.env.PORT || '3000';
 app.set('port', port);
-
 /**
  * Listen on provided port, on all network interfaces.
  */
